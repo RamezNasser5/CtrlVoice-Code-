@@ -1,13 +1,7 @@
 {
-  "keybindings": [
-    {
-      "key": "ctrl+alt+F",
-      "command": "ctrlvoice-code.readCurrentLine"
-    }
-  ],
   "name": "ctrlvoice-code",
   "displayName": "CtrlVoice Code",
-  "description": "CtrlVoice Code is a Visual Studio Code extension designed to empower blind and visually impaired developers by enabling them to write, edit, and navigate code using their voice. This innovative extension provides a set of intuitive voice-activated shortcuts and commands that make coding accessible to all. With VoiceCode, you can speak your code, receive audio feedback, and efficiently interact with your development environment, breaking down barriers and opening up the world of coding to a wider audience. Say goodbye to limitations and embrace the power of voice for a seamless coding experience.",
+  "description": "CtrlVoice Code is a Visual Studio Code extension designed to empower blind and visually impaired developers...",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.84.0"
@@ -22,6 +16,13 @@
       {
         "command": "extension.exampleCommand",
         "title": "exampleCommand"
+      }
+    ],
+    "keybindings": [
+      {
+        "key": "ctrl+shift+q",
+        "command": "extension.exampleCommand",
+        "when": "editorTextFocus"
       }
     ]
   },
