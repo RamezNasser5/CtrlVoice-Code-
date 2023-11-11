@@ -1,0 +1,5 @@
+{
+    "key": "Ctrl+Shift+R",
+    "command": "extension.deleteLineWithoutSelection",
+    "when": "editorTextFocus"
+}
