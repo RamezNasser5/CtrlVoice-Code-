@@ -9,19 +9,79 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "extension.exampleCommand",
-        "title": "exampleCommand"
+        "command": "extension.readLine",
+        "title": "Read Line"
+      },
+      {
+        "command": "extension.jumpToNextLine",
+        "title": "Jump to Next Line"
+      },
+      {
+        "command": "extension.jumpToPreviousLine",
+        "title": "Jump to Previous Line"
+      },
+      {
+        "command": "extension.jumpToBeginOfPage",
+        "title": "Jump to the Beginning of Page"
+      },
+      {
+        "command": "extension.jumpToEndOfPage",
+        "title": "Jump to End Of Page"
+      },
+      {
+        "command": "extension.goToLineStart",
+        "title": "Go to Line Start"
+      },
+      {
+        "command": "extension.goToLineEnd",
+        "title": "Go to Line End"
       }
     ],
     "keybindings": [
       {
-        "key": "ctrl+shift+q",
-        "command": "extension.exampleCommand",
+        "key": "ctrl+shift+r",
+        "command": "extension.readLine",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+l",
+        "command": "extension.jumpToNextLine",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+k",
+        "command": "extension.jumpToPreviousLine",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+b",
+        "command": "extension.jumpToBeginOfPage",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+f",
+        "command": "extension.jumpToEndOfPage",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+r",
+        "command": "extension.readStory",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+s",
+        "command": "extension.goToLineStart",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+e",
+        "command": "extension.goToLineEnd",
         "when": "editorTextFocus"
       }
     ]
