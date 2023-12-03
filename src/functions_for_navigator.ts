@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as read from "./functions_for_voice";
 
 
 function findNextFunctionStart(document: vscode.TextDocument, currentLine: number): number {
@@ -21,7 +22,7 @@ function findPreviousFunctionStart(document: vscode.TextDocument, currentLine: n
     return 0;
 }
 
-export function jumpToNextLine() {
+export function jumpToNextLineAndRead() {
     const editor = vscode.window.activeTextEditor;
 
     if (editor) {
@@ -30,10 +31,11 @@ export function jumpToNextLine() {
         const newSelection = new vscode.Selection(newPosition, newPosition);
         editor.selection = newSelection;
         editor.revealRange(new vscode.Range(newPosition, newPosition));
+        read.readLine();
     }
 }
 
-export function jumpToPreviousLine() {
+export function jumpToPreviousLineAndRead() {
     const editor = vscode.window.activeTextEditor;
 
     if (editor) {
@@ -42,6 +44,7 @@ export function jumpToPreviousLine() {
         const newSelection = new vscode.Selection(newPosition, newPosition);
         editor.selection = newSelection;
         editor.revealRange(new vscode.Range(newPosition, newPosition));
+        read.readLine();
     }
 }
 

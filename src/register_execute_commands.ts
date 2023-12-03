@@ -19,11 +19,11 @@ export function registerCommands() {
 
 
     const jumpToNextLineDisposable = vscode.commands.registerCommand('extension.jumpToNextLine', () => {
-        navigator.jumpToNextLine();
+        navigator.jumpToNextLineAndRead();
     });
 
     const jumpToPreviousLineDisposable = vscode.commands.registerCommand('extension.jumpToPreviousLine', () => {
-        navigator.jumpToPreviousLine();
+        navigator.jumpToPreviousLineAndRead();
     });
 
     
