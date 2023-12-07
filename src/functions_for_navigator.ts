@@ -3,16 +3,6 @@ import * as read from "./functions_for_voice";
 
 
 function findPageStart(document: vscode.TextDocument, currentLine: number): number {
-    for (let line = currentLine + 1; line < document.lineCount; line++) {
-        const text = document.lineAt(line).text;
-        if (text.includes('function')) {
-            return line;
-        }
-    }
-    return document.lineCount - 1;
-}
-
-function findPageEnd(document: vscode.TextDocument, currentLine: number): number {
     for (let line = currentLine - 1; line >= 0; line--) {
         const text = document.lineAt(line).text;
         if (text.includes('function')) {
@@ -20,6 +10,17 @@ function findPageEnd(document: vscode.TextDocument, currentLine: number): number
         }
     }
     return 0;
+}
+
+function findPageEnd(document: vscode.TextDocument, currentLine: number): number {
+
+    for (let line = currentLine + 1; line < document.lineCount; line++) {
+        const text = document.lineAt(line).text;
+        if (text.includes('function')) {
+            return line;
+        }
+    }
+    return document.lineCount - 1;
 }
 
 export function jumpToNextLineAndRead() {
