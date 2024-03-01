@@ -4,21 +4,17 @@ This is the README for your extension "ctrlvoice-code". After writing up a brief
 
 ## Features
 
-CtrlVoice Code is a Visual Studio Code extension designed to empower blind and visually impaired developers...
-•	we build new extension
-•	we add (ctrl+shift+r) to read the current line
-•	we build (ctrl+alt+s) to move on to start line and (ctrl+alt+e) to move on to end of line 
-•	 we build (ctrl+alt+l) to jump to next line and (ctrl+alt+k) to jump to previous line and  
-(ctrl+alt+b) to jumb to begin of page and (ctrl+alt+f) to jump to final of page and (ctrl+alt+r) to read the full page 
-•	We make jump to next line and to jump to previous line have read feature 
+Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
+For example if there is an image subfolder under your extension project workspace:
+
+\!\[feature X\]\(images/feature-x.png\)
+
+> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
 ## Requirements
 
-install visual studio code
-install node.js
-npm install
-npm install --save-dev @types/vscode@latest
+If you have any requirements or dependencies, add a section describing those and how to install and configure them.
 
 ## Extension Settings
 
@@ -58,8 +54,6 @@ Added features X, Y, and Z.
 Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
 
 * [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-* https://code.visualstudio.com/api/get-started/your-first-extension
-* https://code.visualstudio.com/docs/getstarted/keybindings
 
 ## Working with Markdown
 

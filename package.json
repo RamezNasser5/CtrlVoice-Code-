@@ -41,6 +41,10 @@
       {
         "command": "extension.goToLineEnd",
         "title": "Go to Line End"
+      },
+      {
+        "command": "extension.readProblems",
+        "title": "Read Problems"
       }
     ],
     "keybindings": [
@@ -50,12 +54,12 @@
         "when": "editorTextFocus"
       },
       {
-        "key": "ctrl+alt+l",
+        "key": "ctrl+alt+n",
         "command": "extension.jumpToNextLine",
         "when": "editorTextFocus"
       },
       {
-        "key": "ctrl+alt+k",
+        "key": "ctrl+alt+l",
         "command": "extension.jumpToPreviousLine",
         "when": "editorTextFocus"
       },
@@ -82,6 +86,16 @@
       {
         "key": "ctrl+alt+e",
         "command": "extension.goToLineEnd",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+p",
+        "command": "extension.stopReading",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+shift+e",
+        "command": "extension.readProblems",
         "when": "editorTextFocus"
       }
     ]
