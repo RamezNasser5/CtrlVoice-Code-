@@ -35,6 +35,19 @@
 				"npm: watch-tests"
 			],
 			"problemMatcher": []
+		},
+		{
+			"type": "go",
+			"label": "go: build package",
+			"command": "build",
+			"args": [
+				"${fileDirname}"
+			],
+			"problemMatcher": [
+				"$go"
+			],
+			"group": "build",
+			"detail": "cd d:\\programers\\material\\Graduation Project Material\\CtrlVoice-Code--3\\CtrlVoice-Code-; go build ${fileDirname}"
 		}
 	]
 }

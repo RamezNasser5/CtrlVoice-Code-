@@ -40,6 +40,12 @@ export function registerCommands() {
     const readStoryDisposable = vscode.commands.registerCommand('extension.readStory', () => {
         read.readEntireStory();
     });
+    const stopReadingDisposable = vscode.commands.registerCommand('extension.stopReading', () => {
+        read.stopReading();
+    });
+    const readProblemDisposable = vscode.commands.registerCommand('extension.readProblems', () => {
+        read.readProblems();
+    });
     return { readLineDisposable, 
         jumpToNextLineDisposable, 
         jumpToPreviousLineDisposable, 
@@ -47,7 +53,10 @@ export function registerCommands() {
         jumpToEndOfPageDisposable, 
         readStoryDisposable, 
         goToLineEndDisposable, 
-        goToLineStartDisposable };
+        goToLineStartDisposable,
+        stopReadingDisposable,
+        readProblemDisposable,
+     };
 }
 
 export function addSubscriptions(context: vscode.ExtensionContext,
@@ -57,7 +66,10 @@ export function addSubscriptions(context: vscode.ExtensionContext,
     jumpToBeginOfPageCommandId: string,
     jumpToEndOfPageCommandId: string,
     goToLineStartCommandId: string,
-    goToLineEndCommandId: string) {
+    goToLineEndCommandId: string,
+    stopReadingCommandId: string,
+    readProblemCommandId: string,
+    ) {
 
     context.subscriptions.push(
         vscode.commands.registerCommand(readLine, () => {
@@ -80,6 +92,12 @@ export function addSubscriptions(context: vscode.ExtensionContext,
         }),
         vscode.commands.registerCommand(goToLineEndCommandId, () => {
             vscode.commands.executeCommand('extension.goToLineEnd');
+        }),
+        vscode.commands.registerCommand(stopReadingCommandId, () => {
+            vscode.commands.executeCommand('extension.stopReading');
+        }),
+        vscode.commands.registerCommand(readProblemCommandId, () => {
+            vscode.commands.executeCommand('extension.stopReading');
         })
     );
 }

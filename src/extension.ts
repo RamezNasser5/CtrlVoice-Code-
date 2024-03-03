@@ -12,7 +12,10 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
         jumpToEndOfPageDisposable, 
         readStoryDisposable, 
         goToLineEndDisposable, 
-        goToLineStartDisposable } = read.registerCommands();
+        goToLineStartDisposable,
+        stopReadingDisposable,
+        readProblemDisposable,
+     } = read.registerCommands();
 
     context.subscriptions.push(
         readLineDisposable,
@@ -22,10 +25,12 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
         jumpToEndOfPageDisposable,
         readStoryDisposable,
         goToLineEndDisposable,
-        goToLineStartDisposable
+        goToLineStartDisposable,
+        stopReadingDisposable,
+        readProblemDisposable,
     );
 
-    for (let i = 1; i <= 9; i++) {
+    for (let i = 1; i <= 10 ; i++) {
         const readLineCommandId = `extension.readLine${i}`;
         const jumpToNextLineCommandId = `extension.jumpToNextLine${i}`;
         const jumpToPreviousLineCommandId = `extension.jumpToPreviousLine${i}`;
@@ -33,6 +38,8 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
         const jumpToEndOfPageCommandId = `extension.jumpToEndOfPage${i}`;
         const goToLineStartCommandId = `extension.goToLineStart${i}`;
         const goToLineEndCommandId = `extension.goToLineEnd${i}`;
+        const stopReadingCommandId = `extension.stopReading${i}`;
+        const readProblemCommandId = `extension.stopReading${i}`;
 
         read.addSubscriptions(context, 
             readLineCommandId, 
@@ -41,7 +48,10 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
             jumpToBeginOfPageCommandId, 
             jumpToEndOfPageCommandId, 
             goToLineStartCommandId, 
-            goToLineEndCommandId);
+            goToLineEndCommandId,
+            stopReadingCommandId,
+            readProblemCommandId,
+            );
     }
     return readLineDisposable;
 
