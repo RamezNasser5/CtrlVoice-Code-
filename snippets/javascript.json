@@ -1,0 +1,224 @@
+{
+    "print to console":{
+      "prefix": "log",
+      "body": "console.log",
+      "description": "log to console"
+    },
+    "VariableDeclaration": {
+      "prefix": "Var",
+      "body": [
+          "${1|var,let,const|} ${2:name} = ${3:value};"
+      ],
+      "description": "Declare a JavaScript variable with type"
+  },
+  "named function": {
+      "prefix": "fn",
+      "body": [
+        "function ${1:functionName}() {",
+        "  ${2://functionBody};",
+        "}"
+      ],
+      "description": "named function"
+    },
+    "anonymous function": {
+      "prefix": "fn",
+      "body": [
+        "${1|const,var,let|} ${2:varName} = function ($3) { ",
+        "   ${4://functionBody};",
+        "}"
+      ],
+      "description": "anonymous function"
+    },"arrow function": {
+      "prefix": "fn",
+      "body": [
+        "${1|const,var,let|} ${2:varName} = ($3)=> { ",
+        " ${4://functionBody};",
+        "}"
+      ],
+      "description": "arrow function"
+    },"if statement": {
+      "prefix": "f",
+      "body": [
+        "if ($1) {",
+        "  $2",
+        "}"
+      ],
+      "description": "if statement"
+    },
+    "if else statement": {
+      "prefix": "f",
+      "body": [
+        "if ($1) {",
+        " $2",
+        "} else {",
+        "  $3",
+        "}"
+      ],
+      "description": "if statement"
+    },
+    "if else if statement": {
+      "prefix": "f",
+      "body": [
+        "",
+        "if ($1) {",
+        "  $2",
+        "} else if ($3) {",
+        "  $4",
+        "}  else {",
+        "  $5",
+        "}"
+      ],
+      "description": "if else if statement"
+    },
+    "for loop": {
+      "prefix": "loop",
+      "body": [
+        "for (for (${let} i = ${1:0}; i ${2|<,>,<=,>=,==|} ${3:5}; ${4:i++}) {",
+        "  $4",
+        "}"
+      ],
+      "description": "for loop"
+    },
+    "while loop": {
+      "prefix": "loop",
+      "body": [
+        "while ($1) {",
+        " $2",
+        "  ${3:i++};",
+        "}"
+      ],
+      "description": "while loop"
+    },
+    "do while loop": {
+      "prefix": "loop",
+      "body": [
+        "do {",
+        "  $1",
+        "  ${2:i++};",
+        "} while ($3);}"
+      ],
+      "description": "do while loop"
+    },
+    "switch case": {
+      "prefix": "case",
+      "body": [
+        "switch($1) {",
+        "  case $2:",
+        "    $3",
+        "    break;",
+        "  case $4:",
+        "    $5",
+        "    break;",
+        "  default:",
+        "    $6",
+        "}"
+      ],
+      "description": "switch case"
+    },
+    "try catch": {
+      "prefix": "try",
+      "body": [
+        "try {",
+        "  $1",
+        "} catch (${2:exceptionVar}) {",
+        "  $3",
+        "} finally {",
+        "  $4",
+        "}"
+      ],
+      "description": "try catch"
+    },
+    "obj": {
+      "prefix": "DS",
+      "body": [
+        "const ${1:obj} = {",
+        "    ${2:key}: ${3:value},",
+        "       $4,",
+        "   ",
+        "}"
+      ],
+      "description": "object declaration"
+    },
+    "APi Xmlhttprequest": {
+      "prefix": "api",
+      "body": [
+        "const xhttpr = new XMLHttpRequest();",
+        "xhttpr.open('${1|GET,POST|}', '${2:Api_address}', ${3|true,false|});",
+        "",
+        "xhttpr.send();",
+        "",
+        "xhttpr.onload = ()=> {",
+        "if (xhttpr.status === 200) {",
+        "const response = JSON.parse(xhttpr.response);",
+        "$4",
+        "} else {",
+        "${5://Handle error}",
+        "}",
+        "};",
+        ""
+      ],
+      "description": "try catch"
+    },
+    "Api Fetch method": {
+      "prefix": "api",
+      "body": [
+        "fetch(${1:'Api_address'})",
+        ".then(response => {",
+        "if (response.ok) {",
+        "return response.json(); // Parse the response data as JSON",
+        "} else {",
+        "throw new Error('API request failed');",
+        "}",
+        "})",
+        ".then(data => {",
+        "// Process the response data here",
+        "$2",
+        "})",
+        ".catch(error => {",
+        "// Handle any errors here",
+        "${3:console.error(error)}; ",
+        "});",
+        ""
+      ],
+      "description": "Api Fetch method"
+    },
+    "Api axios method": {
+      "prefix": "api",
+      "body": [
+        "import axios from 'axios';",
+        " ",
+        "axios.get(${1:'APIURL'})",
+        "    .then(response => {",
+        "        //Access the response data",
+        "        const responseData = response.data;",
+        "        // Process the response data here",
+        "        $2",
+        "    })",
+        "    .catch(error => {",
+        "        // Handle any errors",
+        "        $3",
+        "    });"
+      ],
+      "description": "Api axios method"
+    },
+    "Api ajax method": {
+      "prefix": "api",
+      "body": [
+        "$.ajax({",
+        "url: ${1:'APIURL'},",
+        "method: '${2|GET,POST|}',",
+        "success: function(response) {",
+        "const parsedData = JSON.parse(response);",
+        "// Process the parsed data here",
+        "                $3",
+        "},",
+        "error: function(xhr, status, error) {",
+        "// Handle any errors",
+        "                $4",
+        "}",
+        "});",
+        ""
+      ],
+      "description": "Api ajax method"
+    }
+  }
