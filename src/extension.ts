@@ -15,6 +15,8 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
         goToLineStartDisposable,
         stopReadingDisposable,
         readProblemDisposable,
+        handleErrorsDisposable,
+        readOptionsDisposable,
      } = read.registerCommands();
 
     context.subscriptions.push(
@@ -28,6 +30,8 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
         goToLineStartDisposable,
         stopReadingDisposable,
         readProblemDisposable,
+        handleErrorsDisposable,
+        readOptionsDisposable,
     );
 
     for (let i = 1; i <= 10 ; i++) {
@@ -40,6 +44,9 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
         const goToLineEndCommandId = `extension.goToLineEnd${i}`;
         const stopReadingCommandId = `extension.stopReading${i}`;
         const readProblemCommandId = `extension.stopReading${i}`;
+        const  handleErrorsCommandId = `extension.handleErrors${i}`;
+        const readNextSuggestionCommandId = `extension.stopReading${i}`;
+
 
         read.addSubscriptions(context, 
             readLineCommandId, 
@@ -51,6 +58,8 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
             goToLineEndCommandId,
             stopReadingCommandId,
             readProblemCommandId,
+            handleErrorsCommandId,
+            readNextSuggestionCommandId,
             );
     }
     return readLineDisposable;

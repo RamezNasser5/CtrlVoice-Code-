@@ -45,6 +45,10 @@
       {
         "command": "extension.readProblems",
         "title": "Read Problems"
+      },
+      {
+        "command": "extension.handleErrors",
+        "title": "Handle Errors"
       }
     ],
     "keybindings": [
@@ -96,6 +100,16 @@
       {
         "key": "ctrl+shift+e",
         "command": "extension.readProblems",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+h",
+        "command": "extension.handleErrors",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+o",
+        "command": "extension.readNextSuggestion",
         "when": "editorTextFocus"
       }
     ],

@@ -46,6 +46,12 @@ export function registerCommands() {
     const readProblemDisposable = vscode.commands.registerCommand('extension.readProblems', () => {
         read.readProblems();
     });
+    const handleErrorsDisposable = vscode.commands.registerCommand('extension.handleErrors', () => {
+        navigator.handleErrors();
+    });
+    const readOptionsDisposable =  vscode.commands.registerCommand('extension.readNextSuggestion', async () =>  {
+        read.readNextSuggestion();
+    });
     return { readLineDisposable, 
         jumpToNextLineDisposable, 
         jumpToPreviousLineDisposable, 
@@ -55,7 +61,9 @@ export function registerCommands() {
         goToLineEndDisposable, 
         goToLineStartDisposable,
         stopReadingDisposable,
-        readProblemDisposable,
+        readProblemDisposable, 
+        handleErrorsDisposable,
+        readOptionsDisposable,
      };
 }
 
@@ -69,6 +77,8 @@ export function addSubscriptions(context: vscode.ExtensionContext,
     goToLineEndCommandId: string,
     stopReadingCommandId: string,
     readProblemCommandId: string,
+    handleErrorsCommandId: string,
+    readNextSuggestionCommandId: string,
     ) {
 
     context.subscriptions.push(
@@ -98,6 +108,12 @@ export function addSubscriptions(context: vscode.ExtensionContext,
         }),
         vscode.commands.registerCommand(readProblemCommandId, () => {
             vscode.commands.executeCommand('extension.stopReading');
-        })
+        }),
+        vscode.commands.registerCommand(handleErrorsCommandId, () => {
+            vscode.commands.executeCommand('extension.handleErrors');
+        }),
+        vscode.commands.registerCommand(readNextSuggestionCommandId, () => {
+            vscode.commands.executeCommand('extension.readNextSuggestion');
+        }),
     );
 }

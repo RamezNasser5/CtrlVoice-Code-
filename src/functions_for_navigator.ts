@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
 import * as read from "./functions_for_voice";
+import say from 'say';
+
 
 
 function findPageStart(document: vscode.TextDocument, currentLine: number): number {
@@ -97,4 +99,64 @@ export function goToLineStart() {
         const newSelection = new vscode.Selection(newPosition, newPosition);
         editor.selection = newSelection;
     }
+}
+
+export function handleErrors() {
+    const editor = vscode.window.activeTextEditor;
+    if (editor) {
+        const document = editor.document;
+        const diagnostics = vscode.languages.getDiagnostics(document.uri);
+        if (diagnostics.length === 0) {
+            say.speak('No errors found.');
+            vscode.window.showInformationMessage('No errors found.');
+            return;
+        }
+        else{
+        const uniqueErrorLines: Set<number> = new Set();
+        diagnostics.forEach((diagnostic) => {
+            const { range } = diagnostic;
+            for (let i = range.start.line; i <= range.end.line; i++) {
+                if(i === range.start.line||i===range.end.line)
+                {
+                    uniqueErrorLines.add(i+1);
+                }
+                else
+                {uniqueErrorLines.add(i);}
+            }
+        });
+        const errorLines = Array.from(uniqueErrorLines).sort((a, b) => a - b);
+        if (errorLines.length === 0) {
+            say.speak('No errors found.');
+            vscode.window.showInformationMessage('No errors found.');
+            return;
+        }
+        else if(errorLines.length === 1){
+        const errorLineNumber = errorLines[0] ;
+        const newPosition = new vscode.Position(errorLines[0]-1, 0); 
+        const newSelection = new vscode.Selection(newPosition, newPosition);
+        editor.selection = newSelection;
+        const errorMessage = `Error at line ${errorLineNumber}: ${diagnostics[0].message}.`;
+        say.speak(errorMessage);
+        vscode.window.showErrorMessage(errorMessage);
+        }
+
+        else if(errorLines.length > 1) {
+            const newPosition = new vscode.Position(errorLines[0]-1, 0); 
+            const newSelection = new vscode.Selection(newPosition, newPosition);
+            editor.selection = newSelection; 
+            const diagSet = new Set();
+            for (const diagnostic of diagnostics) {
+                diagSet.add(diagnostic.message);
+            }
+            const diag = Array.from(diagSet);
+            const additionalErrorsMessage = `Sorry, your code contains several errors at the lines: ${errorLines.slice(0).join(', ')}, Expected errors: ${diag.slice(0).join(', ')}.`;
+            say.speak(additionalErrorsMessage);
+            vscode.window.showErrorMessage(additionalErrorsMessage);
+        }
+        else{
+            const additionalWarningMessage = `There appears to be a problem although we have not detected any errors in your code.`;
+            say.speak(additionalWarningMessage);
+            vscode.window.showWarningMessage(additionalWarningMessage);
+        }}
+    } 
 }

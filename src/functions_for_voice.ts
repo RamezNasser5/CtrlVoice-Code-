@@ -80,21 +80,43 @@ export function readProblems() {
 //     recognition.start();
 // }
 
-function insertTextIntoEditor(text: string) {
-    const editor = vscode.window.activeTextEditor;
-    if (editor) {
-        editor.edit(editBuilder => {
-            editBuilder.insert(editor.selection.active, text);
-        });
+// function insertTextIntoEditor(text: string) {
+//     const editor = vscode.window.activeTextEditor;
+//     if (editor) {
+//         editor.edit(editBuilder => {
+//             editBuilder.insert(editor.selection.active, text);
+//         });
+//     }
+// }
+
+// function finalizeSpeechInput() {
+//     vscode.commands.executeCommand('setContext', 'speechInputFinished', true);
+//     vscode.commands.executeCommand('setContext', 'speechInputActive', false);
+// }
+
+// function cancelSpeechInput() {
+//     vscode.commands.executeCommand('setContext', 'speechInputCancelled', true);
+//     vscode.commands.executeCommand('setContext', 'speechInputActive', false);
+// }
+
+let suggestionIndex = 0;
+
+export async function readNextSuggestion() {
+    const activeEditor = vscode.window.activeTextEditor;
+    if (activeEditor) {
+        const suggestions = await vscode.commands.executeCommand<vscode.CompletionList>('vscode.executeCompletionItemProvider', activeEditor.document.uri, activeEditor.selection.active);
+        if (suggestions?.items) {
+            const suggestion = suggestions.items[suggestionIndex];
+            if (suggestion) {
+                const label = typeof suggestion.label === 'string' ? suggestion.label : suggestion.label.label;
+                vscode.window.showInformationMessage(`Reading suggestion: ${label}`);
+                say.speak(label);
+                suggestionIndex++;
+            } else {
+                vscode.window.showInformationMessage('No more suggestions.');
+            }
+        }
+    } else {
+        vscode.window.showInformationMessage('No active editor.');
     }
-}
-
-function finalizeSpeechInput() {
-    vscode.commands.executeCommand('setContext', 'speechInputFinished', true);
-    vscode.commands.executeCommand('setContext', 'speechInputActive', false);
-}
-
-function cancelSpeechInput() {
-    vscode.commands.executeCommand('setContext', 'speechInputCancelled', true);
-    vscode.commands.executeCommand('setContext', 'speechInputActive', false);
 }
