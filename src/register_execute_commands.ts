@@ -1,22 +1,21 @@
 import * as vscode from 'vscode';
 import * as navigator from "./functions_for_navigator";
 import * as read from "./functions_for_voice";
+import * as chat from "./functions_for_chat";
+import * as feedback from "./functions_for_feedback";
 
-export function registerCommands() {
+export function registerCommands(context: vscode.ExtensionContext) {
     const readLineDisposable = vscode.commands.registerCommand('extension.readLine', () => {
         read.readLine();
     });
 
     const goToLineEndDisposable = vscode.commands.registerCommand('extension.goToLineEnd', () => {
         navigator.goToLineEnd();
-
     });
 
     const goToLineStartDisposable = vscode.commands.registerCommand('extension.goToLineStart', () => {
         navigator.goToLineStart();
     });
-
-
 
     const jumpToNextLineDisposable = vscode.commands.registerCommand('extension.jumpToNextLine', () => {
         navigator.jumpToNextLineAndRead();
@@ -26,12 +25,9 @@ export function registerCommands() {
         navigator.jumpToPreviousLineAndRead();
     });
 
-    
-
     const jumpToBeginOfPageDisposable = vscode.commands.registerCommand('extension.jumpToBeginOfPage', () => {
         navigator.jumpToBeginOfPage();
     });
-    
 
     const jumpToEndOfPageDisposable = vscode.commands.registerCommand('extension.jumpToEndOfPage', () => {
         navigator.jumpToEndOfPage();
@@ -40,31 +36,48 @@ export function registerCommands() {
     const readStoryDisposable = vscode.commands.registerCommand('extension.readStory', () => {
         read.readEntireStory();
     });
+
     const stopReadingDisposable = vscode.commands.registerCommand('extension.stopReading', () => {
         read.stopReading();
     });
+
     const readProblemDisposable = vscode.commands.registerCommand('extension.readProblems', () => {
         read.readProblems();
     });
+
     const handleErrorsDisposable = vscode.commands.registerCommand('extension.handleErrors', () => {
         navigator.handleErrors();
     });
-    const readOptionsDisposable =  vscode.commands.registerCommand('extension.readNextSuggestion', async () =>  {
+
+    const readOptionsDisposable = vscode.commands.registerCommand('extension.readNextSuggestion', async () => {
         read.readNextSuggestion();
     });
-    return { readLineDisposable, 
-        jumpToNextLineDisposable, 
-        jumpToPreviousLineDisposable, 
-        jumpToBeginOfPageDisposable, 
-        jumpToEndOfPageDisposable, 
-        readStoryDisposable, 
-        goToLineEndDisposable, 
+
+    const OpenFeedbackdisposable = vscode.commands.registerCommand('extension.openFeedback', () => {
+        feedback.openFeedbackInterface(context);
+    });
+
+    const OpenChatdisposable = vscode.commands.registerCommand('extension.openChat', () => {
+        chat.openChatInterface();
+    });
+    
+
+    return {
+        readLineDisposable,
+        jumpToNextLineDisposable,
+        jumpToPreviousLineDisposable,
+        jumpToBeginOfPageDisposable,
+        jumpToEndOfPageDisposable,
+        readStoryDisposable,
+        goToLineEndDisposable,
         goToLineStartDisposable,
         stopReadingDisposable,
-        readProblemDisposable, 
+        readProblemDisposable,
         handleErrorsDisposable,
         readOptionsDisposable,
-     };
+        OpenChatdisposable,
+        OpenFeedbackdisposable,
+    };
 }
 
 export function addSubscriptions(context: vscode.ExtensionContext,
@@ -79,7 +92,9 @@ export function addSubscriptions(context: vscode.ExtensionContext,
     readProblemCommandId: string,
     handleErrorsCommandId: string,
     readNextSuggestionCommandId: string,
-    ) {
+    openChatCommandId: string,
+    openFeedbackCommandId: string,
+) {
 
     context.subscriptions.push(
         vscode.commands.registerCommand(readLine, () => {
@@ -115,5 +130,24 @@ export function addSubscriptions(context: vscode.ExtensionContext,
         vscode.commands.registerCommand(readNextSuggestionCommandId, () => {
             vscode.commands.executeCommand('extension.readNextSuggestion');
         }),
+        vscode.commands.registerCommand(openChatCommandId, () => {
+            vscode.commands.executeCommand('extension.openChat');
+        }),
+        vscode.commands.registerCommand(openFeedbackCommandId, () => {
+            vscode.commands.executeCommand('extension.openFeedback');
+        }),
     );
 }
+
+// console.log(context);
+        // const panel = vscode.window.createWebviewPanel(
+        //     'openChat',
+        //     'Chat',
+        //     vscode.ViewColumn.One,
+        //     {
+        //         localResourceRoots: [vscode.Uri.joinPath(context?.extensionUri, 'ChatRoom')]
+        //     },
+        // );
+        //const onDiskPath = vscode.Uri.joinPath( context?.extensionUri , 'ChatRoom', 'chat.css');
+        //const catGifSrc = panel.webview.asWebviewUri(onDiskPath);
+    

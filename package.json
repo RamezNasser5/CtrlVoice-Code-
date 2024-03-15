@@ -49,6 +49,14 @@
       {
         "command": "extension.handleErrors",
         "title": "Handle Errors"
+      },
+      {
+        "command": "extension.openChat",
+        "title": "Open ChatRoom"
+      },
+      {
+        "command": "extension.openFeedback",
+        "title": "Open Feedback"
       }
     ],
     "keybindings": [
@@ -111,14 +119,34 @@
         "key": "ctrl+alt+o",
         "command": "extension.readNextSuggestion",
         "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+d",
+        "command": "extension.openFeedback",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+t",
+        "command": "extension.openChat",
+        "when": "editorTextFocus"
       }
     ],
-    "snippets": [
-      {
-          "language": "javascript",
-          "path": "./snippets/javascript.json"
-      }  
-    ]
+    "views": {
+      "webviewPanels": [
+          {
+              "id": "myChatInterface",
+              "name": "My Chat Interface",
+              "column": "main",
+              "webviewPath": "D:\\programers\\material\\level_4\\CtrlVoice-Code-\\ChatRoom\\chat.html"
+          },
+          {
+              "id": "feedbackInterface",
+              "name": "Feedback Interface",
+              "column": "main",
+              "webviewPath": "D:\\programers\\material\\level_4\\CtrlVoice-Code-\\feedback\\feedback.html"
+          }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
