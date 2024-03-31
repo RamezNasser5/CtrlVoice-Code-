@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import * as vscode from 'vscode';
-=======
 import * as vscode from "vscode";
->>>>>>> 180045896e03e82b250439c94528d5260d33f006
 
 export function openChatInterface() {
     // Show the webview panel

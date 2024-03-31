@@ -1,11 +1,10 @@
-<<<<<<< HEAD
 import * as vscode from 'vscode';
 
-
 export function openFeedbackInterface() {
+    // Show the webview panel
     const panel = vscode.window.createWebviewPanel(
         'OpenFeedback',
-        'Open Feeadback',
+        'Open Feedback',
         vscode.ViewColumn.One,
         {
             enableScripts: true 
@@ -36,39 +35,10 @@ export function openFeedbackInterface() {
             </style>
         </head>
         <body>
-            <iframe src="http://localhost:3000/"></iframe>
+            <iframe src="http://localhost:3001/"></iframe>
         </body>
         </html>
     `;
-}
-=======
-import { readFileSync } from 'fs';
-import * as vscode from 'vscode';
 
-
-export function openFeedbackInterface(context: vscode.ExtensionContext) {
-    
-    const editor = vscode.window.activeTextEditor;
-    if (editor) {
-            // Show the webview panel
-            const panel = vscode.window.createWebviewPanel(
-                'feedbackInterface',
-                'Feedback Interface',
-                vscode.ViewColumn.One,
-                {
-                    enableScripts: true ,
-                }
-            );
-            vscode.window.showErrorMessage(`${context.extensionUri}`);
-            panel.webview.html = getFeedWebviewContent();
-        
-    } else {
-        vscode.window.showErrorMessage('No active text editor.');
-    }
 }
 
-function getFeedWebviewContent(): string { 
-    const filePath = readFileSync(__dirname + './../feedback/feedback.html' , {encoding : 'utf-8'});
-    return filePath;
-}
->>>>>>> 180045896e03e82b250439c94528d5260d33f006

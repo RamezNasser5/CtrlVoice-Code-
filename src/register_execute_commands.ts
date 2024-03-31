@@ -54,11 +54,7 @@ export function registerCommands(context: vscode.ExtensionContext) {
     });
 
     const OpenFeedbackdisposable = vscode.commands.registerCommand('extension.openFeedback', () => {
-<<<<<<< HEAD
         feedback.openFeedbackInterface();
-=======
-        feedback.openFeedbackInterface(context);
->>>>>>> 180045896e03e82b250439c94528d5260d33f006
     });
 
     const OpenChatdisposable = vscode.commands.registerCommand('extension.openChat', () => {
