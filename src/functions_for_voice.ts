@@ -64,41 +64,6 @@ export function readProblems() {
     diagnosticIndex = (diagnosticIndex + 1) % flattenedDiagnostics.length;
 }
 
-// export function startSpeechToText() {
-//     const recognition = new vscode.window.SpeechRecognition();
-
-//     recognition.onresult = (event: SpeechRecognitionEvent) => {
-//         const text = event.results[0][0].transcript;
-//         insertTextIntoEditor(text);
-//         finalizeSpeechInput();
-//     };
-
-//     recognition.onend = () => {
-//         cancelSpeechInput();
-//     };
-
-//     recognition.start();
-// }
-
-// function insertTextIntoEditor(text: string) {
-//     const editor = vscode.window.activeTextEditor;
-//     if (editor) {
-//         editor.edit(editBuilder => {
-//             editBuilder.insert(editor.selection.active, text);
-//         });
-//     }
-// }
-
-// function finalizeSpeechInput() {
-//     vscode.commands.executeCommand('setContext', 'speechInputFinished', true);
-//     vscode.commands.executeCommand('setContext', 'speechInputActive', false);
-// }
-
-// function cancelSpeechInput() {
-//     vscode.commands.executeCommand('setContext', 'speechInputCancelled', true);
-//     vscode.commands.executeCommand('setContext', 'speechInputActive', false);
-// }
-
 let suggestionIndex = 0;
 
 export async function readNextSuggestion() {

@@ -1,0 +1,10 @@
+# POST http://localhost:3001/authenticate
+# Contect-Type:application/json
+# { "username": "Mina"} 
+POST http://localhost:3001/authenticate
+Content-Type: application/json
+
+{
+  "username": "Salah"
+}
+
