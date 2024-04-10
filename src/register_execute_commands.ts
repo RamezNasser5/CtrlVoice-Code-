@@ -3,8 +3,9 @@ import * as navigator from "./functions_for_navigator";
 import * as read from "./functions_for_voice";
 import * as chat from "./functions_for_chat";
 import * as feedback from "./functions_for_feedback";
+import * as openAI from "./functions_for_openai";
 
-export function registerCommands(context: vscode.ExtensionContext) {
+export function registerCommands() {
     const readLineDisposable = vscode.commands.registerCommand('extension.readLine', () => {
         read.readLine();
     });
@@ -60,6 +61,10 @@ export function registerCommands(context: vscode.ExtensionContext) {
     const OpenChatdisposable = vscode.commands.registerCommand('extension.openChat', () => {
         chat.openChatInterface();
     });
+
+    const OpenAIdisposable = vscode.commands.registerCommand('extension.openAI', () => {
+        openAI.chatInterface();
+    });
     
 
     return {
@@ -77,6 +82,7 @@ export function registerCommands(context: vscode.ExtensionContext) {
         readOptionsDisposable,
         OpenChatdisposable,
         OpenFeedbackdisposable,
+        OpenAIdisposable,
     };
 }
 
@@ -94,6 +100,7 @@ export function addSubscriptions(context: vscode.ExtensionContext,
     readNextSuggestionCommandId: string,
     openChatCommandId: string,
     openFeedbackCommandId: string,
+    openAICommandId: string,
 ) {
 
     context.subscriptions.push(
@@ -136,6 +143,9 @@ export function addSubscriptions(context: vscode.ExtensionContext,
         vscode.commands.registerCommand(openFeedbackCommandId, () => {
             vscode.commands.executeCommand('extension.openFeedback');
         }),
+        vscode.commands.registerCommand(openAICommandId, () => {
+            vscode.commands.executeCommand('extension.openAI');
+        })
     );
 }
 

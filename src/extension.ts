@@ -19,7 +19,8 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
         readOptionsDisposable,
         OpenChatdisposable,
         OpenFeedbackdisposable,
-    } = read.registerCommands(context);
+        OpenAIdisposable,
+    } = read.registerCommands();
 
     context.subscriptions.push(
         readLineDisposable,
@@ -35,10 +36,11 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
         handleErrorsDisposable,
         readOptionsDisposable,
         OpenChatdisposable,
-        OpenFeedbackdisposable
+        OpenFeedbackdisposable,
+        OpenAIdisposable,
     );
 
-    for (let i = 1; i <= 14; i++) {
+    for (let i = 1; i <= 15; i++) {
         const readLineCommandId = `extension.readLine${i}`;
         const jumpToNextLineCommandId = `extension.jumpToNextLine${i}`;
         const jumpToPreviousLineCommandId = `extension.jumpToPreviousLine${i}`;
@@ -52,6 +54,7 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
         const readNextSuggestionCommandId = `extension.readNextSuggestion${i}`;
         const openChatCommandId = `extension.openChat${i}`;
         const openFeedbackCommandId = `extension.openFeedback${i}`;
+        const openAICommandId = `extension.openAI${i}`;
 
         read.addSubscriptions(context,
             readLineCommandId,
@@ -67,6 +70,7 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
             readNextSuggestionCommandId,
             openChatCommandId,
             openFeedbackCommandId,
+            openAICommandId,
         );
     }
     return readLineDisposable;
@@ -83,3 +87,6 @@ export function deactivate(): void {
 //         "path": "./snippets/javascript.json"
 //     }  
 //   ],
+
+
+//My API key : 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

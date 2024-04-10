@@ -9,8 +9,7 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-  ],
+  "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
@@ -57,6 +56,10 @@
       {
         "command": "extension.openFeedback",
         "title": "Open Feedback"
+      },
+      {
+        "command": "extension.openAI",
+        "title": "OpenAI"
       }
     ],
     "keybindings": [
@@ -129,22 +132,27 @@
         "key": "ctrl+alt+t",
         "command": "extension.openChat",
         "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+shift+a",
+        "command": "extension.openAI",
+        "when": "editorTextFocus"
       }
     ],
     "views": {
       "webviewPanels": [
-          {
-              "id": "myChatInterface",
-              "name": "My Chat Interface",
-              "column": "main",
-              "webviewPath": "D:\\programers\\material\\level_4\\CtrlVoice-Code-\\ChatRoom\\chat.html"
-          },
-          {
-              "id": "feedbackInterface",
-              "name": "Feedback Interface",
-              "column": "main",
-              "webviewPath": "D:\\programers\\material\\level_4\\CtrlVoice-Code-\\feedback\\feedback.html"
-          }
+        {
+          "id": "myChatInterface",
+          "name": "My Chat Interface",
+          "column": "main",
+          "webviewPath": "D:\\programers\\material\\level_4\\CtrlVoice-Code-\\ChatRoom\\chat.html"
+        },
+        {
+          "id": "feedbackInterface",
+          "name": "Feedback Interface",
+          "column": "main",
+          "webviewPath": "D:\\programers\\material\\level_4\\CtrlVoice-Code-\\feedback\\feedback.html"
+        }
       ]
     }
   },
@@ -177,6 +185,7 @@
   "dependencies": {
     "espeak": "^0.0.3",
     "google-tts-api": "^0.0.6",
+    "openai": "^4.33.0",
     "play-sound": "^1.1.6",
     "say": "^0.16.0"
   }
