@@ -1,8 +1,6 @@
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  apiKey: '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',
-});
+const openai = new OpenAI();
 
 export async function chatInterface() {
     try {
