@@ -65,7 +65,11 @@ export function registerCommands() {
     const OpenAIdisposable = vscode.commands.registerCommand('extension.openAI', () => {
         openAI.chatInterface();
     });
-    
+
+    const explanCodeDisposable = vscode.commands.registerCommand('extension.explainCode', () => {
+        openAI.explainCode();
+    });
+
 
     return {
         readLineDisposable,
@@ -83,6 +87,7 @@ export function registerCommands() {
         OpenChatdisposable,
         OpenFeedbackdisposable,
         OpenAIdisposable,
+        explanCodeDisposable,
     };
 }
 
@@ -101,6 +106,7 @@ export function addSubscriptions(context: vscode.ExtensionContext,
     openChatCommandId: string,
     openFeedbackCommandId: string,
     openAICommandId: string,
+    explanCodeCommandId: string,
 ) {
 
     context.subscriptions.push(
@@ -145,19 +151,21 @@ export function addSubscriptions(context: vscode.ExtensionContext,
         }),
         vscode.commands.registerCommand(openAICommandId, () => {
             vscode.commands.executeCommand('extension.openAI');
+        }),
+        vscode.commands.registerCommand(explanCodeCommandId, () => {
+            vscode.commands.executeCommand('extension.explainCode');
         })
     );
 }
 
 // console.log(context);
-        // const panel = vscode.window.createWebviewPanel(
-        //     'openChat',
-        //     'Chat',
-        //     vscode.ViewColumn.One,
-        //     {
-        //         localResourceRoots: [vscode.Uri.joinPath(context?.extensionUri, 'ChatRoom')]
-        //     },
-        // );
-        //const onDiskPath = vscode.Uri.joinPath( context?.extensionUri , 'ChatRoom', 'chat.css');
-        //const catGifSrc = panel.webview.asWebviewUri(onDiskPath);
-    
+// const panel = vscode.window.createWebviewPanel(
+//     'openChat',
+//     'Chat',
+//     vscode.ViewColumn.One,
+//     {
+//         localResourceRoots: [vscode.Uri.joinPath(context?.extensionUri, 'ChatRoom')]
+//     },
+// );
+//const onDiskPath = vscode.Uri.joinPath( context?.extensionUri , 'ChatRoom', 'chat.css');
+//const catGifSrc = panel.webview.asWebviewUri(onDiskPath);

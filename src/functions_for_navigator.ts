@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import * as read from "./functions_for_voice";
-import say from 'say';
 
 
 
@@ -99,6 +98,7 @@ export function goToLineStart() {
         const newSelection = new vscode.Selection(newPosition, newPosition);
         editor.selection = newSelection;
     }
+
 }
 
 let currentErrorIndex = 0;

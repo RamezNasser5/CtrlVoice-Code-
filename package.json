@@ -60,6 +60,10 @@
       {
         "command": "extension.openAI",
         "title": "OpenAI"
+      },
+      {
+        "command": "extension.explainCode",
+        "title": "Explain Code"
       }
     ],
     "keybindings": [
@@ -137,6 +141,11 @@
         "key": "ctrl+shift+a",
         "command": "extension.openAI",
         "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+shift+q",
+        "command": "extension.explainCode",
+        "when": "editorTextFocus"
       }
     ],
     "views": {
@@ -183,6 +192,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.6.0",
     "espeak": "^0.0.3",
     "google-tts-api": "^0.0.6",
     "openai": "^4.33.0",

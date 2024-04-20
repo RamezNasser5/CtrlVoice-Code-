@@ -1,22 +1,57 @@
-import OpenAI from "openai";
+import * as vscode from 'vscode';
+import say from 'say';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const openai = new OpenAI();
+// Access your API key as an environment variable (see "Set up your API key" above)
+const genAI = new GoogleGenerativeAI('AIzaSyCKb-OZto7o3tahH1CANNzW3DJXf4DYBkE');
+const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 export async function chatInterface() {
-    try {
-        const stream = await openai.chat.completions.create({
-          model: "gpt-4", // Adjust the model name if needed
-          messages: [{ role: "user", content: "Say this is a test" }],
-          stream: true,
-        });
-    
-        console.log("API call successful!");
-    
-        for await (const chunk of stream) {
-          process.stdout.write(chunk.choices[0]?.delta?.content || "");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
+
+  const editor = vscode.window.activeTextEditor;
+  var lineText = "";
+
+  if (editor) {
+    const selection = editor.selection;
+    const lineStart = new vscode.Position(selection.active.line, 0);
+    const lineEnd = new vscode.Position(selection.active.line + 1, 0);
+    const lineRange = new vscode.Range(lineStart, lineEnd);
+    lineText = editor.document.getText(lineRange);
+  }
+
+  const prompt = `Explain this line ${lineText}`;
+
+  const result = await model.generateContent(prompt);
+  const response = result.response;
+  const text = response.text();
+  vscode.window.showInformationMessage(text);
+  say.speak(text);
 }
 
+export async function explainCode() {
+  const editor = vscode.window.activeTextEditor;
+  let fullText = "";
+  let input_txt = "";
+
+  if (editor) {
+    fullText = editor.document.getText();
+  }
+
+  const input = await vscode.window.showInputBox({ prompt: "Enter your code" });
+
+  if (input) {
+    input_txt = input;
+
+    const prompt = `Explain ${input_txt} in this code ${fullText}`;
+
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const text = response.text();
+    vscode.window.showInformationMessage(text);
+    say.speak(text);
+  } else {
+    vscode.window.showInformationMessage("Input canceled");
+  }
+}
+
+//AIzaSyCKb-OZto7o3tahH1CANNzW3DJXf4DYBkE
