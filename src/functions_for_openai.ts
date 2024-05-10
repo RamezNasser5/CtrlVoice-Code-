@@ -30,28 +30,44 @@ export async function chatInterface() {
 
 export async function explainCode() {
   const editor = vscode.window.activeTextEditor;
-  let fullText = "";
-  let input_txt = "";
 
   if (editor) {
-    fullText = editor.document.getText();
-  }
+    const fullText = editor.document.getText();
+    const input = await vscode.window.showInputBox({ prompt: "Enter your code" });
 
-  const input = await vscode.window.showInputBox({ prompt: "Enter your code" });
+    if (input) {
 
-  if (input) {
-    input_txt = input;
+      const prompt = `${input} ${fullText} and give me only my complete code after modifying it`;
 
-    const prompt = `Explain ${input_txt} in this code ${fullText}`;
+      const result = await model.generateContent(prompt);
+      const response = result.response;
+      const newText = response.text();
 
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const text = response.text();
-    vscode.window.showInformationMessage(text);
-    say.speak(text);
-  } else {
-    vscode.window.showInformationMessage("Input canceled");
+      vscode.window.showInformationMessage(newText);
+
+      editor.edit(editBuilder => {
+        const documentStart = new vscode.Position(0, 0);
+        const documentEnd = new vscode.Position(editor.document.lineCount + 1, 0);
+        const documentRange = new vscode.Range(documentStart, documentEnd);
+        const chars: string[] = [];
+        var flage = false;
+        for (let index = 0; index < newText.length; index++) {
+          if (newText[index] !== "`") {
+            chars[index] = newText[index];
+          }
+          while (newText[index] !== "\n" && !flage) {
+            chars[index] = "";
+            index++;
+          }
+          flage = true;
+        }
+        editBuilder.replace(documentRange, chars.join(''));
+      });
+
+      say.speak(newText);
+    } else {
+      vscode.window.showInformationMessage("Input canceled");
+    }
   }
 }
-
 //AIzaSyCKb-OZto7o3tahH1CANNzW3DJXf4DYBkE

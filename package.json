@@ -193,6 +193,8 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.6.0",
+    "@types/artyom.js": "^1.0.6",
+    "artyom.js": "^1.0.6",
     "espeak": "^0.0.3",
     "google-tts-api": "^0.0.6",
     "openai": "^4.33.0",

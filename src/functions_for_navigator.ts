@@ -1,6 +1,45 @@
 import * as vscode from 'vscode';
 import * as read from "./functions_for_voice";
+//import Artyom from 'artyom.js';
 
+//let artyom: Artyom;
+
+// export function jumpToNextLineAndRead() {
+//     artyom = new Artyom();
+
+//     artyom.addCommands({
+//         indexes: ['*text'],
+//         action: (i: number, wildcard: string) => {
+//             insertTextIntoEditor(wildcard);
+//         }
+//     });
+
+//     artyom.start({
+//         continuous: true,
+//         listen: true
+//     });
+// }
+
+// function insertTextIntoEditor(text: string) {
+//     const editor = vscode.window.activeTextEditor;
+//     if (editor) {
+//         editor.edit(editBuilder => {
+//             editBuilder.insert(editor.selection.active, text);
+//         });
+//     }
+// }
+
+// export function finalizeSpeechInput() {
+//     vscode.commands.executeCommand('setContext', 'speechInputFinished', true);
+//     vscode.commands.executeCommand('setContext', 'speechInputActive', false);
+//     artyom.fatality(); // Stop speech recognition
+// }
+
+// export function cancelSpeechInput() {
+//     vscode.commands.executeCommand('setContext', 'speechInputCancelled', true);
+//     vscode.commands.executeCommand('setContext', 'speechInputActive', false);
+//     artyom.fatality(); // Stop speech recognition
+// }
 
 
 function findPageStart(document: vscode.TextDocument, currentLine: number): number {
@@ -111,7 +150,7 @@ export function handleErrors() {
 
     const document = editor.document;
     const diagnostics = vscode.languages.getDiagnostics(document.uri);
-    
+
     // Extract unique error lines
     const uniqueErrorLines: Set<number> = new Set();
     diagnostics.forEach((diagnostic) => {
@@ -120,15 +159,15 @@ export function handleErrors() {
             uniqueErrorLines.add(i + 1); // Add 1 to make lines 1-based
         }
     });
-    
+
     // Convert set to sorted array
     const errorLines = Array.from(uniqueErrorLines).sort((a, b) => a - b);
-    
+
     // If there are no errors, do nothing
     if (errorLines.length === 0) {
         return;
     }
-    
+
     // Ensure currentErrorIndex stays within bounds
     currentErrorIndex %= errorLines.length;
 
