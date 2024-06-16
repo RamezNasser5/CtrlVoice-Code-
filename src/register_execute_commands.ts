@@ -4,7 +4,7 @@ import * as read from "./functions_for_voice";
 import * as chat from "./functions_for_chat";
 import * as feedback from "./functions_for_feedback";
 import * as openAI from "./functions_for_openai";
-import * as speach from "./speach_to_text";
+import * as speach from "./speech_to_text";
 
 export function registerCommands() {
     const readLineDisposable = vscode.commands.registerCommand('extension.readLine', () => {
@@ -71,8 +71,8 @@ export function registerCommands() {
         openAI.explainCode();
     });
 
-    const speachToTextDisposable = vscode.commands.registerCommand('extension.SpeachToText', () => {
-        speach.speachToText();
+    const speachToTextDisposable = vscode.commands.registerCommand('extension.SpeechToText', async () => {
+        speach.speechToText();
     });
 
 
@@ -163,7 +163,7 @@ export function addSubscriptions(context: vscode.ExtensionContext,
             vscode.commands.executeCommand('extension.explainCode');
         }),
         vscode.commands.registerCommand(speachToTextCommandId, () => {
-            vscode.commands.executeCommand('extension.SpeachToText');
+            vscode.commands.executeCommand('extension.SpeechToText');
         }),
     );
 }

@@ -58,7 +58,7 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
         const openFeedbackCommandId = `extension.openFeedback${i}`;
         const openAICommandId = `extension.openAI${i}`;
         const explanCodeCommandId = `extension.explainCode${i}`;
-        const speachToTextCommandId = `extension.SpeachToText${i}`;
+        const speachToTextCommandId = `extension.SpeechToText${i}`;
 
         read.addSubscriptions(context,
             readLineCommandId,

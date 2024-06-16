@@ -66,8 +66,8 @@
         "title": "Explain Code"
       },
       {
-        "command": "extension.SpeachToText",
-        "title": "Speach To Text"
+        "command": "extension.SpeechToText",
+        "title": "Speech To Text"
       }
     ],
     "keybindings": [
@@ -181,8 +181,9 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
     "@types/mocha": "^10.0.3",
-    "@types/node": "18.x",
+    "@types/node": "^18.19.34",
     "@types/vscode": "^1.84.0",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",
@@ -191,7 +192,7 @@
     "glob": "^10.3.10",
     "mocha": "^10.2.0",
     "ts-loader": "^9.5.0",
-    "typescript": "^5.2.2",
+    "typescript": "^5.4.5",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   },
@@ -199,8 +200,16 @@
     "@google/generative-ai": "^0.6.0",
     "@types/artyom.js": "^1.0.6",
     "artyom.js": "^1.0.6",
+    "assemblyai": "^4.4.7",
+    "axios": "^1.7.2",
     "espeak": "^0.0.3",
+    "express": "^4.17.1",
+    "ffmpeg-static": "^5.2.0",
+    "fluent-ffmpeg": "^2.1.2",
     "google-tts-api": "^0.0.6",
+    "multer": "^1.4.3",
+    "node-microphone": "^0.1.6",
+    "node-record-lpcm16": "^1.0.1",
     "openai": "^4.33.0",
     "play-sound": "^1.1.6",
     "say": "^0.16.0"
