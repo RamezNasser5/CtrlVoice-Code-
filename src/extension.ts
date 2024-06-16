@@ -2,8 +2,6 @@ import * as vscode from 'vscode';
 import * as read from "./register_execute_commands";
 
 export function activate(context: vscode.ExtensionContext): vscode.Disposable {
-    //vscode.window.showErrorMessage(`${context.extensionUri}`);
-    //file:///d%3A/programers/material/level_4/CtrlVoice-Code-/ChatRoom/download.jpg
     const {
         readLineDisposable,
         jumpToNextLineDisposable,
@@ -21,6 +19,7 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
         OpenFeedbackdisposable,
         OpenAIdisposable,
         explanCodeDisposable,
+        speachToTextDisposable,
     } = read.registerCommands();
 
     context.subscriptions.push(
@@ -40,6 +39,7 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
         OpenFeedbackdisposable,
         OpenAIdisposable,
         explanCodeDisposable,
+        speachToTextDisposable,
     );
 
     for (let i = 1; i <= 16; i++) {
@@ -58,6 +58,7 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
         const openFeedbackCommandId = `extension.openFeedback${i}`;
         const openAICommandId = `extension.openAI${i}`;
         const explanCodeCommandId = `extension.explainCode${i}`;
+        const speachToTextCommandId = `extension.SpeachToText${i}`;
 
         read.addSubscriptions(context,
             readLineCommandId,
@@ -75,6 +76,7 @@ export function activate(context: vscode.ExtensionContext): vscode.Disposable {
             openFeedbackCommandId,
             openAICommandId,
             explanCodeCommandId,
+            speachToTextCommandId,
         );
     }
     return readLineDisposable;

@@ -64,6 +64,10 @@
       {
         "command": "extension.explainCode",
         "title": "Explain Code"
+      },
+      {
+        "command": "extension.SpeachToText",
+        "title": "Speach To Text"
       }
     ],
     "keybindings": [
