@@ -1,6 +1,6 @@
-import * as vscode from 'vscode';
-import say from 'say';
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import say from 'say';
+import * as vscode from 'vscode';
 
 // Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI('AIzaSyCKb-OZto7o3tahH1CANNzW3DJXf4DYBkE');
@@ -28,46 +28,40 @@ export async function chatInterface() {
   say.speak(text);
 }
 
-export async function explainCode() {
+export async function EditCode(transcript: string) {
   const editor = vscode.window.activeTextEditor;
 
   if (editor) {
     const fullText = editor.document.getText();
-    const input = await vscode.window.showInputBox({ prompt: "Enter your code" });
 
-    if (input) {
+    const prompt = `${transcript} ${fullText} and give me only my complete code after modifying it`;
 
-      const prompt = `${input} ${fullText} and give me only my complete code after modifying it`;
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const newText = response.text();
 
-      const result = await model.generateContent(prompt);
-      const response = result.response;
-      const newText = response.text();
+    vscode.window.showInformationMessage(newText);
 
-      vscode.window.showInformationMessage(newText);
-
-      editor.edit(editBuilder => {
-        const documentStart = new vscode.Position(0, 0);
-        const documentEnd = new vscode.Position(editor.document.lineCount + 1, 0);
-        const documentRange = new vscode.Range(documentStart, documentEnd);
-        const chars: string[] = [];
-        var flage = false;
-        for (let index = 0; index < newText.length; index++) {
-          if (newText[index] !== "`") {
-            chars[index] = newText[index];
-          }
-          while (newText[index] !== "\n" && !flage) {
-            chars[index] = "";
-            index++;
-          }
-          flage = true;
+    editor.edit(editBuilder => {
+      const documentStart = new vscode.Position(0, 0);
+      const documentEnd = new vscode.Position(editor.document.lineCount + 1, 0);
+      const documentRange = new vscode.Range(documentStart, documentEnd);
+      const chars: string[] = [];
+      var flage = false;
+      for (let index = 0; index < newText.length; index++) {
+        if (newText[index] !== "`") {
+          chars[index] = newText[index];
         }
-        editBuilder.replace(documentRange, chars.join(''));
-      });
+        while (newText[index] !== "\n" && !flage) {
+          chars[index] = "";
+          index++;
+        }
+        flage = true;
+      }
+      editBuilder.replace(documentRange, chars.join(''));
+    });
 
-      say.speak(newText);
-    } else {
-      vscode.window.showInformationMessage("Input canceled");
-    }
+    say.speak(newText);
   }
 }
 //AIzaSyCKb-OZto7o3tahH1CANNzW3DJXf4DYBkE

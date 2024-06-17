@@ -1,14 +1,15 @@
-import * as fs from 'fs';
-import * as path from 'path';
 import axios from 'axios';
-import * as vscode from 'vscode';
+import * as fs from 'fs';
 import Microphone from 'node-microphone';
+import * as path from 'path';
+import * as vscode from 'vscode';
+import * as openai from './functions_for_openai';
 
 const API_KEY = '15ef8eb55ab245e3a0b440a997c2d1d3';
 
 export async function speechToText() {
     try {
-        vscode.window.showInformationMessage('Recording audio for 5 seconds...');
+        vscode.window.showInformationMessage('Recording audio for 10 seconds...');
         const audioFilePath = await recordAudio();
 
         // Check if the file is created and not empty
@@ -21,6 +22,7 @@ export async function speechToText() {
         vscode.window.showInformationMessage('Sending audio to AssemblyAI...');
         const transcription = await sendAudioToAssemblyAI(audioFilePath);
         vscode.window.showInformationMessage('Transcription: ' + transcription);
+        openai.EditCode(transcription);
     } catch (error) {
         if (error instanceof Error) {
             vscode.window.showErrorMessage('Error: ' + error.message);
@@ -44,7 +46,7 @@ async function recordAudio(): Promise<string> {
             mic.stopRecording();
             fileStream.close();
             resolve(audioFilePath);
-        }, 5000); // Record for 5 seconds
+        }, 10000); // Record for 10 seconds
     });
 }
 

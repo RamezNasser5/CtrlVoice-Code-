@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
-import * as navigator from "./functions_for_navigator";
-import * as read from "./functions_for_voice";
 import * as chat from "./functions_for_chat";
 import * as feedback from "./functions_for_feedback";
+import * as navigator from "./functions_for_navigator";
 import * as openAI from "./functions_for_openai";
+import * as read from "./functions_for_voice";
 import * as speach from "./speech_to_text";
 
 export function registerCommands() {
@@ -68,7 +68,7 @@ export function registerCommands() {
     });
 
     const explanCodeDisposable = vscode.commands.registerCommand('extension.explainCode', () => {
-        openAI.explainCode();
+        openAI.EditCode('any thing');
     });
 
     const speachToTextDisposable = vscode.commands.registerCommand('extension.SpeechToText', async () => {
